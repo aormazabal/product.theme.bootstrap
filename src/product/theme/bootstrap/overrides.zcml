@@ -1,0 +1,10 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+    <adapter factory="product.theme.bootstrap.browser.adapters.DexterityItem"
+             for="plone.dexterity.interfaces.IDexterityContent
+                  Products.CMFPlone.interfaces.syndication.IFeed"
+             provides="Products.CMFPlone.interfaces.syndication.IFeedItem"/>
+
+</configure>

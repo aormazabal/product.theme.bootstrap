@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rules xmlns="http://namespaces.plone.org/diazo"
+       xmlns:css="http://namespaces.plone.org/diazo/css"
+       xmlns:xhtml="http://www.w3.org/1999/xhtml"
+       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+       xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <rules css:if-content="body.portaltype-easyform">
+        <before css:content-children="#form" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                col-md-8 m-auto
+            </xsl:attribute>
+        </before>
+        <before css:content-children="#form .form-group input[type=text]" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control
+            </xsl:attribute>
+        </before>
+        <before css:content-children="#form .form-group textarea" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control
+            </xsl:attribute>
+        </before>
+        <before css:content-children="#form .form-group select" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control
+            </xsl:attribute>
+        </before>
+    </rules>
+
+
+    <rules css:if-content="body.template-contact-info, body.portaltype-easyform, body.template-home_view">
+        <after css:content-children="#form .field">
+            <div class="invalid-feedback">
+                <xsl:value-of select=".//*[@class='fieldErrorBox']/div"/>
+            </div>
+        </after>
+        <after css:content-children="#form .field">
+            <div class="form-text text-muted">
+                <xsl:value-of select=".//*[@class='formHelp']"/>
+            </div>
+        </after>
+
+
+        <before css:content-children="#form .field input[type=text]" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control
+            </xsl:attribute>
+        </before>
+
+
+        <before css:content-children="#form .field select" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control
+            </xsl:attribute>
+        </before>
+
+        <before css:content-children="#form .field.error input" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control is-invalid
+            </xsl:attribute>
+        </before>
+
+        <after css:content-children="#form .field input[type=text]" method="raw">
+            <xsl:attribute name="placeholder">
+                <xsl:value-of select="..//label/*[@class='label']"/>
+            </xsl:attribute>
+        </after>
+        <after css:content-children="#form .field input[type=text].required"
+               method="raw">
+            <xsl:attribute name="placeholder">
+                <xsl:value-of select="..//label/*[@class='label']"/> *
+            </xsl:attribute>
+        </after>
+
+        <before css:content-children="#form  input[type=submit]" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                btn btn-primary btn-sm
+            </xsl:attribute>
+        </before>
+
+        <drop css:content="#form .field .fieldErrorBox"/>
+        <drop css:content="#form .field .formHelp"/>
+<!--        <drop css:content="#form .field label"/>-->
+
+        <before css:content-children="#form .field label" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                d-none
+            </xsl:attribute>
+        </before>
+
+        <after css:content-children="#form .field.error textarea" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control is-invalid
+            </xsl:attribute>
+        </after>
+        <before css:content-children="#form .field textarea.required"
+               method="raw">
+            <xsl:attribute name="placeholder">
+                <xsl:value-of select="..//label/*[@class='label']"/> *
+            </xsl:attribute>
+        </before>
+        <before css:content-children="#form .field textarea" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control
+            </xsl:attribute>
+            <xsl:attribute name="placeholder">
+                <xsl:value-of select="..//label/*[@class='label']"/>
+            </xsl:attribute>
+        </before>
+
+
+    </rules>
+
+    <rules css:if-content="#form .form-group.error">
+        <before css:content-children="#form .field input[type=text]" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control is-invalid
+            </xsl:attribute>
+        </before>
+        <before css:content-children="#form .field textarea" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control is-invalid
+            </xsl:attribute>
+        </before>
+        <before css:content-children="#form .field select" method="raw">
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class"/>
+                form-control is-invalid
+            </xsl:attribute>
+        </before>
+    </rules>
+
+
+</rules>

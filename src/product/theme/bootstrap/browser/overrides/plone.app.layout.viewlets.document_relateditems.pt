@@ -1,0 +1,42 @@
+<div class="relatedItems pt-4 pb-1"
+         i18n:domain="plone"
+         tal:define="related view/related_items; icons_mapping python: {'file':'book',
+                'news-item':'newspaper',
+                'easyform':'envelope',
+                'document':'file',
+                'image':'image',
+                'link':'link',
+                'folder':'folder',
+                'collection':'th-list'}"
+         tal:condition="related">
+  <div class="visualClear" id="clear-space-before-relatedItemBox"><!-- --></div>
+  <div id="relatedItemBox"
+           tal:define="plone_view nocall:context/@@plone;
+          plone_layout nocall:context/@@plone_layout;
+          normalizeString nocall:plone_view/normalizeString;
+          context_state nocall:context/@@plone_context_state;
+          use_view_action python:context.portal_registry.get('types_use_view_action_in_listings', []);">
+    <div class="h6 pb-1" i18n:translate="label_related_items">Related content</div>
+    <ul class="d-flex flex-wrap">
+      <li tal:repeat="item related" class="col-md-6 pb-1">
+            <span tal:define="desc                item/Description;
+                    item_type           item/portal_type;
+                    item_type_class     python:normalizeString(item_type);
+                    item_wf_state       item/review_state|python: context_state.workflow_state();
+                    item_wf_state_class python: 'state-' + normalizeString(item_wf_state);
+                    item_url            item/getURL|item/absolute_url;
+                    item_url            python:(item_type in use_view_action) and item_url+'/view' or item_url;
+                    item_has_image      python:item.getIcon"
+                     tal:attributes="title item_type">
+              <a tal:attributes="href  item_url">
+                <i tal:attributes="class python:'fa fa-' + icons_mapping[item_type_class]"
+                        tal:condition="python:item_type_class in icons_mapping.keys()"></i>
+                <i tal:attributes="class string:fa fa-circle"
+                        tal:condition="python:item_type_class not in icons_mapping.keys()"></i>
+                  <span class="pl-2" tal:content="item/pretty_title_or_id">Item Title</span>
+               </a>
+            </span>
+      </li>
+    </ul>
+  </div>
+</div>
